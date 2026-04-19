@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Language Flags Overlay</title>
+    <style>
+        #RunNow.disabled {
+            pointer-events: none !important;
+            opacity: 0.6 !important;
+        }
+
+        #RunProgressWrap {
+            display: none;
+            margin-top: 1em;
+        }
+
+        #RunProgressOuter {
+            width: 100%;
+            height: 16px;
+            background: #2f2f2f;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #RunProgressBar {
+            width: 0%;
+            height: 100%;
+            background: #00a4dc;
+            transition: width 0.25s ease;
+        }
+
+        #RunProgressText {
+            margin-top: 8px;
+        }
+
+        #RunProgressItem {
+            margin-top: 4px;
+            opacity: 0.85;
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div id="LanguageFlagsConfigPage" data-role="page" class="page type-interior pluginConfigurationPage">
+        <div data-role="content">
+            <div class="content-primary">
+                <form id="LanguageFlagsConfigForm">
+                    <div class="sectionTitleContainer flex align-items-center">
+                        <h2 class="sectionTitle">Language Flags Overlay</h2>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="checkboxContainer">
+                            <input id="ProcessMovies" type="checkbox" is="emby-checkbox" />
+                            <span>Process movies</span>
+                        </label>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="checkboxContainer">
+                            <input id="ProcessSeries" type="checkbox" is="emby-checkbox" />
+                            <span>Process series</span>
+                        </label>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="checkboxContainer">
+                            <input id="PreferAudioLanguages" type="checkbox" is="emby-checkbox" />
+                            <span>Prefer audio languages</span>
+                        </label>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="checkboxContainer">
+                            <input id="IncludeSubtitlesIfNoAudio" type="checkbox" is="emby-checkbox" />
+                            <span>Use subtitle languages when no audio language exists</span>
+                        </label>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label for="PreferredLanguages">Preferred languages / country codes</label>
+                        <input id="PreferredLanguages" type="text" is="emby-input" placeholder="de,gb" />
+                        <div class="fieldDescription">
+                            Comma-separated list, for example: de,gb,fr
+                        </div>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label for="MaxFlags">Maximum language flags before plus indicator</label>
+                        <input id="MaxFlags" type="number" is="emby-input" min="1" max="10" />
+                    </div>
+
+                    <div class="inputContainer">
+                        <label for="MarkerSuffix">Generated file suffix</label>
+                        <input id="MarkerSuffix" type="text" is="emby-input" />
+                    </div>
+
+                    <h2 class="sectionTitle">Primary poster overlay</h2>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="GeneratePrimary" type="checkbox" is="emby-checkbox" />
+                            <span>Generate primary poster overlay</span>
+                        </label>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="OverwriteExistingGeneratedPrimary" type="checkbox" is="emby-checkbox" />
+                            <span>Overwrite existing generated primary posters</span>
+                        </label>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label for="PrimaryOverlayPosition">Primary overlay position</label>
+                        <select id="PrimaryOverlayPosition" is="emby-select">
+                            <option value="top-right">Top right</option>
+                            <option value="top-left">Top left</option>
+                            <option value="bottom-right">Bottom right</option>
+                            <option value="bottom-left">Bottom left</option>
+                        </select>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label for="PrimaryFlagWidthPercent">Primary flag width percent</label>
+                        <input id="PrimaryFlagWidthPercent" type="number" min="1" step="1" is="emby-input" />
+                    </div>
+
+                    <div class="inputContainer">
+                        <label for="PrimaryMarginPercent">Primary margin percent</label>
+                        <input id="PrimaryMarginPercent" type="number" min="0" step="1" is="emby-input" />
+                    </div>
+
+                    <div class="inputContainer">
+                        <label for="PrimaryBackgroundOpacity">Primary background opacity</label>
+                        <input id="PrimaryBackgroundOpacity" type="number" min="0" max="1" step="0.05" is="emby-input" />
+                    </div>
+
+                    <div class="inputContainer">
+                        <label for="PrimaryAnchorX">Primary anchor X</label>
+                        <input id="PrimaryAnchorX" type="number" min="0" max="0.5" step="0.005" is="emby-input" />
+                    </div>
+
+                    <div class="inputContainer">
+                        <label for="PrimaryAnchorY">Primary anchor Y</label>
+                        <input id="PrimaryAnchorY" type="number" min="0" max="0.5" step="0.005" is="emby-input" />
+                    </div>
+
+                    <h2 class="sectionTitle">Landscape thumb overlay</h2>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="GenerateLandscape" type="checkbox" is="emby-checkbox" />
+                            <span>Generate landscape thumb overlay</span>
+                        </label>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="OverwriteExistingGeneratedLandscape" type="checkbox" is="emby-checkbox" />
+                            <span>Overwrite existing generated landscape images</span>
+                        </label>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label for="LandscapeOverlayPosition">Landscape overlay position</label>
+                        <select id="LandscapeOverlayPosition" is="emby-select">
+                            <option value="top-right">Top right</option>
+                            <option value="top-left">Top left</option>
+                            <option value="bottom-right">Bottom right</option>
+                            <option value="bottom-left">Bottom left</option>
+                        </select>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label for="LandscapeFlagWidthPercent">Landscape flag width percent</label>
+                        <input id="LandscapeFlagWidthPercent" type="number" min="1" step="1" is="emby-input" />
+                    </div>
+
+                    <div class="inputContainer">
+                        <label for="LandscapeMarginPercent">Landscape margin percent</label>
+                        <input id="LandscapeMarginPercent" type="number" min="0" step="1" is="emby-input" />
+                    </div>
+
+                    <div class="inputContainer">
+                        <label for="LandscapeBackgroundOpacity">Landscape background opacity</label>
+                        <input id="LandscapeBackgroundOpacity" type="number" min="0" max="1" step="0.05" is="emby-input" />
+                    </div>
+
+                    <div class="inputContainer">
+                        <label for="LandscapeAnchorX">Landscape anchor X</label>
+                        <input id="LandscapeAnchorX" type="number" min="0" max="0.5" step="0.005" is="emby-input" />
+                    </div>
+
+                    <div class="inputContainer">
+                        <label for="LandscapeAnchorY">Landscape anchor Y</label>
+                        <input id="LandscapeAnchorY" type="number" min="0" max="0.5" step="0.005" is="emby-input" />
+                    </div>
+
+                    <br />
+
+                    <div>
+                        <button id="SaveButton" is="emby-button" type="submit" class="raised button-submit block">
+                            <span>Save</span>
+                        </button>
+
+                        <button id="RunNow" is="emby-button" type="button" class="raised button-submit block">
+                            <span id="RunNowText">Generate Language Flags Now</span>
+                        </button>
+                    </div>
+
+                    <div id="RunStatus" style="margin-top: 1em;"></div>
+
+                    <div id="RunProgressWrap">
+                        <div id="RunProgressOuter">
+                            <div id="RunProgressBar"></div>
+                        </div>
+                        <div id="RunProgressText"></div>
+                        <div id="RunProgressItem"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var LanguageFlagsConfig = {
+                pluginUniqueId: "3d4c6d2f-3a93-4d67-8d22-3a9c5a7e5b91"
+            };
+
+            var isRunNowBusy = false;
+            var progressTimer = null;
+
+            function resetProgressUi() {
+                document.querySelector('#RunProgressWrap').style.display = 'none';
+                document.querySelector('#RunProgressBar').style.width = '0%';
+                document.querySelector('#RunProgressText').textContent = '';
+                document.querySelector('#RunProgressItem').textContent = '';
+            }
+
+            function setRunState(isRunning, message, isError) {
+                var runButton = document.querySelector('#RunNow');
+                var runText = document.querySelector('#RunNowText');
+                var runStatus = document.querySelector('#RunStatus');
+
+                isRunNowBusy = isRunning;
+
+                runButton.disabled = isRunning;
+                runButton.style.pointerEvents = isRunning ? 'none' : 'auto';
+                runButton.style.opacity = isRunning ? '0.6' : '1';
+                runButton.classList.toggle('disabled', isRunning);
+
+                runText.textContent = isRunning ? 'Running...' : 'Generate Language Flags Now';
+                runStatus.textContent = message || '';
+                runStatus.style.color = isError ? '#ff6b6b' : '#00bcff';
+            }
+
+            function updateProgress(status) {
+                if (typeof status === 'string') {
+                    try {
+                        status = JSON.parse(status);
+                    } catch (e) {
+                        console.error('LanguageFlags: updateProgress parse failed', e, status);
+                        return;
+                    }
+                }
+
+                var wrap = document.querySelector('#RunProgressWrap');
+                var bar = document.querySelector('#RunProgressBar');
+                var text = document.querySelector('#RunProgressText');
+                var item = document.querySelector('#RunProgressItem');
+
+                if (!status) {
+                    return;
+                }
+
+                var total = status.total || 0;
+                var processed = status.processed || 0;
+                var currentItem = status.currentItem || '';
+                var message = status.message || '';
+                var isRunning = !!status.isRunning;
+                var isCompleted = !!status.isCompleted;
+                var isFailed = !!status.isFailed;
+
+                wrap.style.display = 'block';
+
+                if (isRunning) {
+                    if (total > 0) {
+                        var percent = Math.max(0, Math.min(100, Math.round((processed / total) * 100)));
+                        bar.style.width = percent + '%';
+                        text.textContent = 'Processing [' + processed + '/' + total + ']';
+                    } else {
+                        bar.style.width = '0%';
+                        text.textContent = message || 'Starting...';
+                    }
+
+                    item.textContent = currentItem ? ('Current: ' + currentItem) : '';
+                    return;
+                }
+
+                if (isCompleted) {
+                    var finalPercent = total > 0 ? Math.max(0, Math.min(100, Math.round((processed / total) * 100))) : 100;
+                    bar.style.width = finalPercent + '%';
+                    text.textContent = message || (isFailed ? 'Failed.' : 'Finished.');
+                    item.textContent = currentItem ? ('Current: ' + currentItem) : '';
+                    return;
+                }
+
+                bar.style.width = '0%';
+                text.textContent = message || 'Starting...';
+                item.textContent = currentItem ? ('Current: ' + currentItem) : '';
+            }
+
+            function stopPolling() {
+                if (progressTimer) {
+                    clearInterval(progressTimer);
+                    progressTimer = null;
+                }
+            }
+
+            function pollStatus() {
+                ApiClient.ajax({
+                    type: 'GET',
+                    url: ApiClient.getUrl('LanguageFlagsOverlay/Status'),
+                    dataType: 'json'
+                }).then(function (status) {
+                    if (typeof status === 'string') {
+                        try {
+                            status = JSON.parse(status);
+                        } catch (e) {
+                            console.error('LanguageFlags: failed to parse status JSON', e, status);
+                            return;
+                        }
+                    }
+
+                    updateProgress(status);
+
+                    if (status.isCompleted) {
+                        stopPolling();
+                        setRunState(false, status.message || (status.isFailed ? 'Failed.' : 'Finished.'), !!status.isFailed);
+                    } else if (status.isRunning) {
+                        setRunState(true, 'Manual run in progress...', false);
+                    }
+                }).catch(function (err) {
+                    console.error('LanguageFlags status failed:', err);
+                });
+            }
+
+            function startPolling() {
+                stopPolling();
+                pollStatus();
+                progressTimer = setInterval(pollStatus, 1000);
+            }
+
+            document.querySelector('#LanguageFlagsConfigPage').addEventListener('pageshow', function () {
+                stopPolling();
+                resetProgressUi();
+                document.querySelector('#RunStatus').textContent = '';
+                setRunState(false, '', false);
+
+                Dashboard.showLoadingMsg();
+
+                ApiClient.getPluginConfiguration(LanguageFlagsConfig.pluginUniqueId).then(function (config) {
+                    document.querySelector('#ProcessMovies').checked = config.ProcessMovies;
+                    document.querySelector('#ProcessSeries').checked = config.ProcessSeries;
+                    document.querySelector('#PreferAudioLanguages').checked = config.PreferAudioLanguages;
+                    document.querySelector('#IncludeSubtitlesIfNoAudio').checked = config.IncludeSubtitlesIfNoAudio;
+                    document.querySelector('#PreferredLanguages').value = config.PreferredLanguages || 'de,gb';
+                    document.querySelector('#MaxFlags').value = config.MaxFlags ?? 3;
+                    document.querySelector('#MarkerSuffix').value = config.MarkerSuffix || '.langflags';
+
+                    document.querySelector('#GeneratePrimary').checked = config.GeneratePrimary ?? true;
+                    document.querySelector('#OverwriteExistingGeneratedPrimary').checked = config.OverwriteExistingGeneratedPrimary ?? true;
+                    document.querySelector('#PrimaryOverlayPosition').value = config.PrimaryOverlayPosition || 'top-left';
+                    document.querySelector('#PrimaryFlagWidthPercent').value = config.PrimaryFlagWidthPercent ?? 12;
+                    document.querySelector('#PrimaryMarginPercent').value = config.PrimaryMarginPercent ?? 2;
+                    document.querySelector('#PrimaryBackgroundOpacity').value = config.PrimaryBackgroundOpacity ?? 0.55;
+                    document.querySelector('#PrimaryAnchorX').value = config.PrimaryAnchorX ?? 0.475;
+                    document.querySelector('#PrimaryAnchorY').value = config.PrimaryAnchorY ?? 0.475;
+
+                    document.querySelector('#GenerateLandscape').checked = config.GenerateLandscape ?? true;
+                    document.querySelector('#OverwriteExistingGeneratedLandscape').checked = config.OverwriteExistingGeneratedLandscape ?? true;
+                    document.querySelector('#LandscapeOverlayPosition').value = config.LandscapeOverlayPosition || 'top-left';
+                    document.querySelector('#LandscapeFlagWidthPercent').value = config.LandscapeFlagWidthPercent ?? 12;
+                    document.querySelector('#LandscapeMarginPercent').value = config.LandscapeMarginPercent ?? 2;
+                    document.querySelector('#LandscapeBackgroundOpacity').value = config.LandscapeBackgroundOpacity ?? 0.55;
+                    document.querySelector('#LandscapeAnchorX').value = config.LandscapeAnchorX ?? 0.485;
+                    document.querySelector('#LandscapeAnchorY').value = config.LandscapeAnchorY ?? 0.465;
+                }).finally(function () {
+                    Dashboard.hideLoadingMsg();
+                });
+            });
+
+            document.querySelector('#LanguageFlagsConfigForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                Dashboard.showLoadingMsg();
+
+                ApiClient.getPluginConfiguration(LanguageFlagsConfig.pluginUniqueId).then(function (config) {
+                    config.ProcessMovies = document.querySelector('#ProcessMovies').checked;
+                    config.ProcessSeries = document.querySelector('#ProcessSeries').checked;
+                    config.PreferAudioLanguages = document.querySelector('#PreferAudioLanguages').checked;
+                    config.IncludeSubtitlesIfNoAudio = document.querySelector('#IncludeSubtitlesIfNoAudio').checked;
+                    config.PreferredLanguages = document.querySelector('#PreferredLanguages').value || 'de,gb';
+                    config.MaxFlags = parseInt(document.querySelector('#MaxFlags').value || '3', 10);
+                    config.MarkerSuffix = document.querySelector('#MarkerSuffix').value || '.langflags';
+
+                    config.GeneratePrimary = document.querySelector('#GeneratePrimary').checked;
+                    config.OverwriteExistingGeneratedPrimary = document.querySelector('#OverwriteExistingGeneratedPrimary').checked;
+                    config.PrimaryOverlayPosition = document.querySelector('#PrimaryOverlayPosition').value || 'top-left';
+                    config.PrimaryFlagWidthPercent = parseInt(document.querySelector('#PrimaryFlagWidthPercent').value || '12', 10);
+                    config.PrimaryMarginPercent = parseInt(document.querySelector('#PrimaryMarginPercent').value || '2', 10);
+                    config.PrimaryBackgroundOpacity = parseFloat((document.querySelector('#PrimaryBackgroundOpacity').value || '0.55').replace(',', '.'));
+                    config.PrimaryAnchorX = parseFloat((document.querySelector('#PrimaryAnchorX').value || '0.475').replace(',', '.'));
+                    config.PrimaryAnchorY = parseFloat((document.querySelector('#PrimaryAnchorY').value || '0.475').replace(',', '.'));
+
+                    config.GenerateLandscape = document.querySelector('#GenerateLandscape').checked;
+                    config.OverwriteExistingGeneratedLandscape = document.querySelector('#OverwriteExistingGeneratedLandscape').checked;
+                    config.LandscapeOverlayPosition = document.querySelector('#LandscapeOverlayPosition').value || 'top-left';
+                    config.LandscapeFlagWidthPercent = parseInt(document.querySelector('#LandscapeFlagWidthPercent').value || '12', 10);
+                    config.LandscapeMarginPercent = parseInt(document.querySelector('#LandscapeMarginPercent').value || '2', 10);
+                    config.LandscapeBackgroundOpacity = parseFloat((document.querySelector('#LandscapeBackgroundOpacity').value || '0.55').replace(',', '.'));
+                    config.LandscapeAnchorX = parseFloat((document.querySelector('#LandscapeAnchorX').value || '0.485').replace(',', '.'));
+                    config.LandscapeAnchorY = parseFloat((document.querySelector('#LandscapeAnchorY').value || '0.465').replace(',', '.'));
+
+                    return ApiClient.updatePluginConfiguration(LanguageFlagsConfig.pluginUniqueId, config);
+                }).then(function () {
+                    Dashboard.processPluginConfigurationUpdateResult();
+                }).finally(function () {
+                    Dashboard.hideLoadingMsg();
+                });
+            });
+
+            document.querySelector('#RunNow').addEventListener('click', function (e) {
+                e.preventDefault();
+
+                if (isRunNowBusy) {
+                    return false;
+                }
+
+                setRunState(true, 'Manual run starting...', false);
+                document.querySelector('#RunProgressWrap').style.display = 'block';
+                document.querySelector('#RunProgressBar').style.width = '0%';
+                document.querySelector('#RunProgressText').textContent = 'Starting...';
+                document.querySelector('#RunProgressItem').textContent = '';
+
+                startPolling();
+
+                ApiClient.ajax({
+                    type: 'POST',
+                    url: ApiClient.getUrl('LanguageFlagsOverlay/Run'),
+                    dataType: 'json'
+                }).then(function (result) {
+                    if (typeof result === 'string') {
+                        try {
+                            result = JSON.parse(result);
+                        } catch (e) {
+                            console.warn('LanguageFlags: run response is not parsed JSON', result);
+                        }
+                    }
+                }).catch(function (err) {
+                    stopPolling();
+                    resetProgressUi();
+                    setRunState(false, 'Failed to start language flag generation.', true);
+                    console.error('LanguageFlags run failed:', err);
+                });
+
+                return false;
+            });
+        </script>
+    </div>
+</body>
+</html>

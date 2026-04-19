@@ -1,0 +1,59 @@
+# Build output
+**/bin/
+**/obj/
+**/publish/
+
+# Rider / IntelliJ
+.idea/
+
+# VS Code
+.vscode/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# JetBrains / ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Test / coverage
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+
+# Local release artifacts
+release/
+*.zip
+*.sha256
+
+# Logs
+*.log
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Temporary / backup files
+*.tmp
+*.bak
+
+# Local env files
+.env
+.env.*
+*.local.json
+*.secret
+
+### PowerShell
+*.ps1
+flags

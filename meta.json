@@ -1,0 +1,12 @@
+{
+  "name": "Language Flags Overlay",
+  "guid": "3d4c6d2f-3a93-4d67-8d22-3a9c5a7e5b91",
+  "version": "1.0.0.0",
+  "targetAbi": "10.11.0.0",
+  "owner": "Kekbach",
+  "category": "General",
+  "overview": "Adds language flag overlays to poster and landscape images for movies and series.",
+  "description": "Adds language flag overlays to poster and landscape images for movies and series.",
+  "sourceUrl": "https://github.com/Kekbach/jellifin-language-tag-test",
+  "imageUrl": "https://raw.githubusercontent.com/Kekbach/jellifin-language-tag-test/main/icon.png"
+}
