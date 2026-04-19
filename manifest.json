@@ -5,26 +5,26 @@
     "overview":  "Adds language flag overlays to poster and landscape images for movies and series.",
     "owner":  "Kekbach",
     "category":  "General",
-    "imageUrl":  "https://raw.githubusercontent.com/Kekbach/jellifin-language-tag-test/main/icon.png",
+    "imageUrl":  "https://raw.githubusercontent.com/Kekbach/jellifin-language-tag/main/icon.png",
     "versions":  [
                      {
                          "version":  "1.0.0.0",
                          "changelog":  "Release 1.0.0.0.",
                          "targetAbi":  "10.11.0.0",
-                         "sourceUrl":  "https://github.com/Kekbach/jellifin-language-tag-test",
+                         "sourceUrl":  "https://github.com/Kekbach/jellifin-language-tag",
                          "checksum":  "f3624ad6f04f8da9b03605004f6ea775add8c7409dc3acc20100e8b3e975de8d",
                          "timestamp":  "2026-04-19T21:10:28Z",
                          "links":  [
                                        {
                                            "name":  "GitHub",
-                                           "url":  "https://github.com/Kekbach/jellifin-language-tag-test"
+                                           "url":  "https://github.com/Kekbach/jellifin-language-tag"
                                        }
                                    ],
                          "artifacts":  [
                                            {
                                                "platform":  "generic",
                                                "architecture":  "x86_64",
-                                               "url":  "https://github.com/Kekbach/jellifin-language-tag-test/releases/download/v1.0.0.0/LanguageFlags_1.0.0.0.zip"
+                                               "url":  "https://github.com/Kekbach/jellifin-language-tag/releases/download/v1.0.0.0/LanguageFlags_1.0.0.0.zip"
                                            }
                                        ]
                      }
