@@ -1,3 +1,4 @@
+[
 {
     "guid":  "3d4c6d2f-3a93-4d67-8d22-3a9c5a7e5b91",
     "name":  "Language Flags Overlay",
@@ -12,8 +13,8 @@
                          "changelog":  "Release 1.0.0.0.",
                          "targetAbi":  "10.11.0.0",
                          "sourceUrl":  "https://github.com/Kekbach/jellifin-language-tag",
-                         "checksum":  "f3624ad6f04f8da9b03605004f6ea775add8c7409dc3acc20100e8b3e975de8d",
-                         "timestamp":  "2026-04-19T21:10:28Z",
+                         "checksum":  "5be19c2bc9e3ae3d1e000bc71282cf8ba80e43d6fbab25f85f22568d8f04dd87",
+                         "timestamp":  "2026-04-19T21:22:23Z",
                          "links":  [
                                        {
                                            "name":  "GitHub",
@@ -30,3 +31,4 @@
                      }
                  ]
 }
+]
