@@ -13,8 +13,8 @@
                          "changelog":  "Release 0.0.0.0.",
                          "targetAbi":  "10.11.0.0",
                          "sourceUrl":  "https://github.com/Kekbach/jellifin-language-tag/releases/download/v0.0.0.0/LanguageFlags_0.0.0.0.zip",
-                         "checksum":  "6ce66cf30974bca4715a36ea9c5de92a2076cfe51c22994305006f6a9f8dabd7",
-                         "timestamp":  "2026-04-20T11:46:24Z"
+                         "checksum":  "308df1a2f7d189d384b6630e88537e52",
+                         "timestamp":  "2026-04-20T12:01:00Z"
                      }
                  ]
 }
