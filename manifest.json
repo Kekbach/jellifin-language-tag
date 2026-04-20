@@ -9,12 +9,12 @@
     "imageUrl":  "https://raw.githubusercontent.com/Kekbach/jellifin-language-tag/main/icon.png",
     "versions":  [
                      {
-                         "version":  "1.0.0.0",
-                         "changelog":  "Release 1.0.0.0.",
+                         "version":  "0.0.0.0",
+                         "changelog":  "Release 0.0.0.0.",
                          "targetAbi":  "10.11.0.0",
-                         "sourceUrl":  "https://github.com/Kekbach/jellifin-language-tag/releases/download/v1.0.0.0/LanguageFlags_1.0.0.0.zip",
-                         "checksum":  "84adf9f8d43b6133776074f7006f5358810d7c6c434e12ee261f26bc0ce9479a",
-                         "timestamp":  "2026-04-20T11:29:37Z"
+                         "sourceUrl":  "https://github.com/Kekbach/jellifin-language-tag/releases/download/v0.0.0.0/LanguageFlags_0.0.0.0.zip",
+                         "checksum":  "6ce66cf30974bca4715a36ea9c5de92a2076cfe51c22994305006f6a9f8dabd7",
+                         "timestamp":  "2026-04-20T11:46:24Z"
                      }
                  ]
 }
