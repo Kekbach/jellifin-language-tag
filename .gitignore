@@ -33,6 +33,7 @@ packages/
 
 # Local release artifacts
 release/
+\#Ablage
 *.zip
 *.sha256
 
@@ -57,3 +58,4 @@ Desktop.ini
 ### PowerShell
 *.ps1
 flags
+
